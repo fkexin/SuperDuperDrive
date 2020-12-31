@@ -22,7 +22,7 @@ public class FileService {
     }
 
     @PostConstruct
-    public void postConstruct(){System.out.println("Creating File Service bean");}
+    public void postConstruct(){System.out.println("Creating a File Service bean");}
 
 
     public void insertFile(Authentication authentication,MultipartFile fileUpload) {
@@ -39,7 +39,6 @@ public class FileService {
             e.printStackTrace();
         }
     }
-    public List<File> getAllFiles(){return fileMapper.getAllFiles();}
 
     public List<File> getAllFilesByUserId(Integer userid){return fileMapper.getAllFilesByUserId(userid);}
     public File getFileById(Integer fileid){return fileMapper.getFileById(fileid);}

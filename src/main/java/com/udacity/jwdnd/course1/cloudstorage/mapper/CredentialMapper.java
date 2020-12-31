@@ -7,11 +7,6 @@ import java.util.List;
 
 @Mapper
 public interface CredentialMapper {
-    @Select("SELECT * FROM CREDENTIALS")
-    List<Credential> getAllCredentials();
-
-    @Select("SELECT FROM CREDENTIALS WHERE credentialId = #{credentialId}")
-    Credential getCredByCredId(Integer credId);
 
     @Select("SELECT * FROM CREDENTIALS WHERE userId = #{userId}")
     List<Credential> getCredByUserId(Integer userId);

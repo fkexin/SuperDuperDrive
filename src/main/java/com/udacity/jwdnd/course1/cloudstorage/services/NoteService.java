@@ -33,18 +33,7 @@ public class NoteService {
         return this.noteMapper.getNoteByUserId(userId);
     }
 
-    public Note getNoteByNoteId(Integer noteId) {
-        return this.noteMapper.getNoteByNoteId(noteId);
-    }
-
-    public List<Note> getAllNotes(){
-        return this.noteMapper.getAllNotes();
-    }
-
     public void deleteNote(Integer note){
         this.noteMapper.deleteNote(note);
-    }
-    public void editNote(Note note) {
-        this.noteMapper.updateNote(note);
     }
 }

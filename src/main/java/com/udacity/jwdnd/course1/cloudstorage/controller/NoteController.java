@@ -28,7 +28,7 @@ public class NoteController {
             model.addAttribute("message", "New note added!");
         } catch (Exception e){
             model.addAttribute("error", true);
-            model.addAttribute("message", "Cannot add note." +e.getMessage());
+            model.addAttribute("message", "There was an error saving this note. Please try again." +e.getMessage());
         }
         return new ModelAndView("result");
     }
@@ -39,13 +39,13 @@ public class NoteController {
 //        return "redirect:/home";
         try{
             noteService.deleteNote(noteId);
-            System.out.println("new note created. note id:" + noteId);
+            System.out.println("New note created. note id:" + noteId);
 
             model.addAttribute("success", true);
             model.addAttribute("message", "Note deleted!");
         } catch (Exception e){
             model.addAttribute("error", true);
-            model.addAttribute("message", "Cannot delete note." +e.getMessage());
+            model.addAttribute("message", "There was an error deleting this note. Please try again." +e.getMessage());
         }
         return new ModelAndView("result");
     }

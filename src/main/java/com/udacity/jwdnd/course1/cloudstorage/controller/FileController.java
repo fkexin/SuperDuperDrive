@@ -60,7 +60,7 @@ public class FileController{
             model.addAttribute("message", "File deleted successfully!");
         } catch (Exception e) {
             model.addAttribute("error", true);
-            model.addAttribute("message", "File note deleted. Please try again.");
+            model.addAttribute("message", "There was an error deleting this file. Please try again.");
         }
 
         return new ModelAndView("result");

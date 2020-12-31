@@ -96,11 +96,11 @@ class CloudStorageApplicationTests {
 
 		//logout
 		homePage = new HomePage(driver);
-		homePage.logout();
+		homePage.logout(driver);
 
 		//redirected to login page
-		Thread.sleep(2000);
-		Assertions.assertEquals(baseUrl + "/login?logout", driver.getCurrentUrl());
+		Thread.sleep(1000);
+		Assertions.assertEquals("Login", driver.getTitle());
 
 		//unable to access home -> redirected to login
 		driver.get(baseUrl + "/home");
@@ -122,20 +122,20 @@ class CloudStorageApplicationTests {
 		driver.get(baseUrl + "/home");
 
 		//Check added note
-		List<String> detail = noteTabPage.getNoteDetail(driver);
-		Assertions.assertEquals(noteTitle, detail.get(0));
-		Assertions.assertEquals(noteDescription, detail.get(1));
+		List<String> noteDetail = noteTabPage.getNoteDetail(driver);
+		Assertions.assertEquals(noteTitle, noteDetail.get(0));
+		Assertions.assertEquals(noteDescription, noteDetail.get(1));
 
-		//Editing the description
+		//Editing note description
 		driver.get(baseUrl + "/home");
 		noteDescription= "Cloud drive and test";
 		noteTabPage.editNote(driver, noteTitle, noteDescription);
 
 		//Check edited note
 		driver.get(baseUrl + "/home");
-		detail = noteTabPage.getNoteDetail(driver);
-		Assertions.assertEquals(noteTitle, detail.get(0));
-		Assertions.assertEquals(noteDescription, detail.get(1));
+		noteDetail = noteTabPage.getNoteDetail(driver);
+		Assertions.assertEquals(noteTitle, noteDetail.get(0));
+		Assertions.assertEquals(noteDescription, noteDetail.get(1));
 
 		//Delete note
 		noteTabPage.deleteNote(driver);
@@ -160,11 +160,11 @@ class CloudStorageApplicationTests {
 		driver.get(baseUrl + "/home");
 
 		//Check added credential
-		List<String> detail = credentialTabPage.getCredentialDetail(driver);
-		Assertions.assertEquals(url, detail.get(0));
-		Assertions.assertEquals(username, detail.get(1));
+		List<String> credentialDetail = credentialTabPage.getCredentialDetail(driver);
+		Assertions.assertEquals(url, credentialDetail.get(0));
+		Assertions.assertEquals(username, credentialDetail.get(1));
 		//password is plain text, detail.get(2) is encoded
-		Assertions.assertNotEquals(password, detail.get(2));
+		Assertions.assertNotEquals(password, credentialDetail.get(2));
 
 		//Editing the username only
 		driver.get(baseUrl + "/home");
@@ -173,11 +173,11 @@ class CloudStorageApplicationTests {
 
 		//Check edited credential
 		driver.get(baseUrl + "/home");
-		detail = credentialTabPage.getCredentialDetail(driver);
-		Assertions.assertEquals(url, detail.get(0));
-		Assertions.assertEquals(newUsername, detail.get(1));
+		credentialDetail = credentialTabPage.getCredentialDetail(driver);
+		Assertions.assertEquals(url, credentialDetail.get(0));
+		Assertions.assertEquals(newUsername, credentialDetail.get(1));
 		//password is plain text, detail.get(2) is encoded
-		Assertions.assertNotEquals(password, detail.get(2));
+		Assertions.assertNotEquals(password, credentialDetail.get(2));
 
 		//Delete credential
 		credentialTabPage.deleteCredential(driver);

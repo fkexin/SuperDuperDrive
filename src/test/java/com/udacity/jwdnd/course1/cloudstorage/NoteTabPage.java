@@ -13,7 +13,7 @@ import java.util.List;
 public class NoteTabPage {
     //Notes Tab
     @FindBy(id="nav-notes-tab")
-    private WebElement navNotes;
+    private WebElement noteTab;
 
     @FindBy(id="add-note-button")
     private WebElement addNoteButton;
@@ -30,15 +30,16 @@ public class NoteTabPage {
     @FindBy(id="note-description")
     private WebElement noteDescriptionField;
 
+    //modal footer
+    @FindBy(id="note-modal-submit")
+    private WebElement noteSubmitButton;
+
     @FindBy(id="notetitle")
     private List<WebElement> titleList;
 
     @FindBy(id="notedescription")
     private List<WebElement> descriptionList;
 
-    //modal footer
-    @FindBy(id="note-modal-submit")
-    private WebElement noteSubmitButton;
 
     public NoteTabPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
@@ -52,8 +53,8 @@ public class NoteTabPage {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        wait.until(ExpectedConditions.elementToBeClickable(navNotes)).click();
-        navNotes.click();
+        wait.until(ExpectedConditions.elementToBeClickable(noteTab)).click();
+        noteTab.click();
         wait.until(ExpectedConditions.visibilityOf(addNoteButton));
         if (titleList.size() == 0) {
             return null;
@@ -67,32 +68,33 @@ public class NoteTabPage {
     public void addNote(WebDriver driver, String title, String description) throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 10);
         Thread.sleep(1000);
-        wait.until(ExpectedConditions.elementToBeClickable(navNotes)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(noteTab)).click();
         wait.until(ExpectedConditions.elementToBeClickable(addNoteButton)).click();
-        wait.until(ExpectedConditions.elementToBeClickable(noteTitleField))
-                .sendKeys(title);
-        wait.until(ExpectedConditions.elementToBeClickable(noteDescriptionField))
-                .sendKeys(description);
+
+        wait.until(ExpectedConditions.elementToBeClickable(noteTitleField)).sendKeys(title);
+        wait.until(ExpectedConditions.elementToBeClickable(noteDescriptionField)).sendKeys(description);
+
         wait.until(ExpectedConditions.elementToBeClickable(noteSubmitButton)).click();
     }
 
     public void editNote(WebDriver driver, String title, String description) {
-        WebDriverWait wait = new WebDriverWait(driver, 30);
-        wait.until(ExpectedConditions.elementToBeClickable(navNotes)).click();
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.elementToBeClickable(noteTab)).click();
         wait.until(ExpectedConditions.elementToBeClickable(editNoteButton)).click();
+
         wait.until(ExpectedConditions.elementToBeClickable(noteTitleField)).clear();
-        wait.until(ExpectedConditions.elementToBeClickable(noteTitleField))
-                .sendKeys(title);
+        wait.until(ExpectedConditions.elementToBeClickable(noteTitleField)).sendKeys(title);
+
         wait.until(ExpectedConditions.elementToBeClickable(noteDescriptionField)).clear();
-        wait.until(ExpectedConditions.elementToBeClickable(noteDescriptionField))
-                .sendKeys(description);
+        wait.until(ExpectedConditions.elementToBeClickable(noteDescriptionField)).sendKeys(description);
+
         wait.until(ExpectedConditions.elementToBeClickable(noteSubmitButton)).click();
     }
 
     public void deleteNote(WebDriver driver){
         WebDriverWait wait = new WebDriverWait(driver, 10);
 
-        wait.until(ExpectedConditions.elementToBeClickable(navNotes)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(noteTab)).click();
         wait.until(ExpectedConditions.elementToBeClickable(deleteNoteButton)).click();
     }
 

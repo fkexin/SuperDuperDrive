@@ -32,7 +32,7 @@ public class CredentialController {
             model.addAttribute("message", "New credential added!");
         } catch (Exception e){
             model.addAttribute("error", true);
-            model.addAttribute("message", "Cannot add credential." + e.getMessage());
+            model.addAttribute("message", "There was an error saving this credential. Please try again." + e.getMessage());
         }
         return new ModelAndView("result");
     }
@@ -47,7 +47,7 @@ public class CredentialController {
             model.addAttribute("message", "Credential deleted!");
         } catch (Exception e){
             model.addAttribute("error", true);
-            model.addAttribute("message", "Cannot delete credential." +e.getMessage());
+            model.addAttribute("message", "There was an error deleting this credential. Please try again." +e.getMessage());
         }
         return new ModelAndView("result");
     }

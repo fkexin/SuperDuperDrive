@@ -18,7 +18,7 @@ public class CredentialService {
     }
 
     @PostConstruct
-    public void postConstruct(){System.out.println("Creating Credential service bean");}
+    public void postConstruct(){System.out.println("Creating a Credential service bean");}
 
     public void addCredential(Credential credential){
         System.out.println("current credential: " + credential.getCredentialId());
@@ -29,7 +29,7 @@ public class CredentialService {
             credential.setPassword(this.encryptionService.encryptValue(credential.getPassword(), key));
             credentialMapper.insertCredential(credential);
         } else {
-            System.out.println("updating current credential id: " + credential.getCredentialId());
+            System.out.println("Updating current credential id: " + credential.getCredentialId());
             credential.setUrl(credential.getUrl());
             credential.setUsername(credential.getUsername());
             String key = this.encryptionService.generateKey();
@@ -40,18 +40,10 @@ public class CredentialService {
         }
     }
 
-
-    public List<Credential> getAllCredentials(){
-        return this.credentialMapper.getAllCredentials();
-    }
-
     public List<Credential> getAllCredByUserId(Integer userId){
         return this.credentialMapper.getCredByUserId(userId);
     }
 
-    public Credential getCredByCredId(Integer credId) {
-        return this.credentialMapper.getCredByCredId(credId);
-    }
 
     public void deleteCredential(Integer credId){
         this.credentialMapper.deleteCredential(credId);
