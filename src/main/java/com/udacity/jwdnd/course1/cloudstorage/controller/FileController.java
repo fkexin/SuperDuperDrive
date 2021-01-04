@@ -6,6 +6,7 @@ import com.udacity.jwdnd.course1.cloudstorage.mapper.FileMapper;
 import com.udacity.jwdnd.course1.cloudstorage.model.File;
 import com.udacity.jwdnd.course1.cloudstorage.services.FileService;
 import com.udacity.jwdnd.course1.cloudstorage.services.UserService;
+import org.apache.tomcat.util.http.fileupload.impl.SizeLimitExceededException;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -37,6 +38,13 @@ public class FileController{
             model.addAttribute("message", "No file selected to upload!");
             return new ModelAndView("result");
         }
+        //if the file is too big
+        if(fileUpload.getSize()/ 1024 / 1024 > 2 ) {
+            model.addAttribute("error", true);
+            model.addAttribute("message", "This file has exceeded the file size limit. Please select a new file and try again.");
+            return new ModelAndView("result");
+        }
+
         String filename = fileUpload.getOriginalFilename();
         if (fileMapper.getFileByFilename(userService.getUser(authentication.getName()).getUserid(), filename)
                 != null){
